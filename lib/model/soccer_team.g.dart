@@ -11,6 +11,8 @@ _$SoccerTeamImpl _$$SoccerTeamImplFromJson(Map<String, dynamic> json) =>
       name: json['name'] as String,
       logo: json['logo'] as String,
       id: json['id'] as int,
+      country: json['country'] as String,
+      code: json['code'] as String,
     );
 
 Map<String, dynamic> _$$SoccerTeamImplToJson(_$SoccerTeamImpl instance) =>
@@ -18,4 +20,6 @@ Map<String, dynamic> _$$SoccerTeamImplToJson(_$SoccerTeamImpl instance) =>
       'name': instance.name,
       'logo': instance.logo,
       'id': instance.id,
+      'country': instance.country,
+      'code': instance.code,
     };

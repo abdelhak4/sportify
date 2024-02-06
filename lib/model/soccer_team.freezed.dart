@@ -23,6 +23,8 @@ mixin _$SoccerTeam {
   String get name => throw _privateConstructorUsedError;
   String get logo => throw _privateConstructorUsedError;
   int get id => throw _privateConstructorUsedError;
+  String get country => throw _privateConstructorUsedError;
+  String get code => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -36,7 +38,7 @@ abstract class $SoccerTeamCopyWith<$Res> {
           SoccerTeam value, $Res Function(SoccerTeam) then) =
       _$SoccerTeamCopyWithImpl<$Res, SoccerTeam>;
   @useResult
-  $Res call({String name, String logo, int id});
+  $Res call({String name, String logo, int id, String country, String code});
 }
 
 /// @nodoc
@@ -55,6 +57,8 @@ class _$SoccerTeamCopyWithImpl<$Res, $Val extends SoccerTeam>
     Object? name = null,
     Object? logo = null,
     Object? id = null,
+    Object? country = null,
+    Object? code = null,
   }) {
     return _then(_value.copyWith(
       name: null == name
@@ -69,6 +73,14 @@ class _$SoccerTeamCopyWithImpl<$Res, $Val extends SoccerTeam>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
+      country: null == country
+          ? _value.country
+          : country // ignore: cast_nullable_to_non_nullable
+              as String,
+      code: null == code
+          ? _value.code
+          : code // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -81,7 +93,7 @@ abstract class _$$SoccerTeamImplCopyWith<$Res>
       __$$SoccerTeamImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String name, String logo, int id});
+  $Res call({String name, String logo, int id, String country, String code});
 }
 
 /// @nodoc
@@ -98,6 +110,8 @@ class __$$SoccerTeamImplCopyWithImpl<$Res>
     Object? name = null,
     Object? logo = null,
     Object? id = null,
+    Object? country = null,
+    Object? code = null,
   }) {
     return _then(_$SoccerTeamImpl(
       name: null == name
@@ -112,6 +126,14 @@ class __$$SoccerTeamImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
+      country: null == country
+          ? _value.country
+          : country // ignore: cast_nullable_to_non_nullable
+              as String,
+      code: null == code
+          ? _value.code
+          : code // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -119,7 +141,12 @@ class __$$SoccerTeamImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$SoccerTeamImpl implements _SoccerTeam {
-  _$SoccerTeamImpl({required this.name, required this.logo, required this.id});
+  _$SoccerTeamImpl(
+      {required this.name,
+      required this.logo,
+      required this.id,
+      required this.country,
+      required this.code});
 
   factory _$SoccerTeamImpl.fromJson(Map<String, dynamic> json) =>
       _$$SoccerTeamImplFromJson(json);
@@ -130,10 +157,14 @@ class _$SoccerTeamImpl implements _SoccerTeam {
   final String logo;
   @override
   final int id;
+  @override
+  final String country;
+  @override
+  final String code;
 
   @override
   String toString() {
-    return 'SoccerTeam(name: $name, logo: $logo, id: $id)';
+    return 'SoccerTeam(name: $name, logo: $logo, id: $id, country: $country, code: $code)';
   }
 
   @override
@@ -143,12 +174,14 @@ class _$SoccerTeamImpl implements _SoccerTeam {
             other is _$SoccerTeamImpl &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.logo, logo) || other.logo == logo) &&
-            (identical(other.id, id) || other.id == id));
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.country, country) || other.country == country) &&
+            (identical(other.code, code) || other.code == code));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, name, logo, id);
+  int get hashCode => Object.hash(runtimeType, name, logo, id, country, code);
 
   @JsonKey(ignore: true)
   @override
@@ -168,7 +201,9 @@ abstract class _SoccerTeam implements SoccerTeam {
   factory _SoccerTeam(
       {required final String name,
       required final String logo,
-      required final int id}) = _$SoccerTeamImpl;
+      required final int id,
+      required final String country,
+      required final String code}) = _$SoccerTeamImpl;
 
   factory _SoccerTeam.fromJson(Map<String, dynamic> json) =
       _$SoccerTeamImpl.fromJson;
@@ -179,6 +214,10 @@ abstract class _SoccerTeam implements SoccerTeam {
   String get logo;
   @override
   int get id;
+  @override
+  String get country;
+  @override
+  String get code;
   @override
   @JsonKey(ignore: true)
   _$$SoccerTeamImplCopyWith<_$SoccerTeamImpl> get copyWith =>

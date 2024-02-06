@@ -1,43 +1,59 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:sportify/model/soccer_team.dart';
 
 import 'package:http/http.dart' as http;
+import 'package:sportify/model/team_players.dart';
 
 abstract class SoccerTeamRepository {
   Future<List<SoccerTeam>> fetchSoccerTeam(String teamName);
+  Future<List<TeamPlayers>> fetchTeamPlayers(String teamId,
+      {season = '2023', page = '1'});
 }
 
 class SoccerRepositoryImpl implements SoccerTeamRepository {
   final Map<String, String> header = {
-    'x-rapidapi-host': 'v3.football.api-sports.io',
-    'x-rapidapi-key': 'api_key', // TODO remove it
+    'x-rapidapi-key': dotenv.env['API_KEY'] ?? "",
   };
-
+  final baseUrl = 'v3.football.api-sports.io';
   // final _dioClient = http();
   @override
   Future<List<SoccerTeam>> fetchSoccerTeam(String teamName) async {
-    try {
-      final uri = Uri.https(
-          'v3.football.api-sports.io', '/teams', {'search': teamName});
-      final response = await http.get(
-        uri,
-        headers: header,
-      );
+    final uri = Uri.https(baseUrl, '/teams', {'search': teamName});
+    final response = await http.get(
+      uri,
+      headers: header,
+    );
+    Map<String, dynamic> data = jsonDecode(response.body);
+    final List<SoccerTeam> teamData = data['response']
+        .map<SoccerTeam>((e) => SoccerTeam.fromJson(e['team']))
+        .toList();
+    if (teamData.isEmpty) throw Exception('No data found');
+    return teamData;
+  }
 
-      Map<String, dynamic> data = jsonDecode(response.body);
-      if (data['errors'] != null || data['errors'].isNotEmpty) {
-        throw Exception('An error occurred while fetching data');
-      }
-      final t = data['response']
-          .map<SoccerTeam>((e) => SoccerTeam.fromJson(e['team']))
-          .toList();
-      return t;
-    } catch (e) {
-      debugPrint(e.runtimeType.toString());
-      debugPrint(e.toString());
-      rethrow;
-    }
+  @override
+  Future<List<TeamPlayers>> fetchTeamPlayers(String teamId,
+      {season = '2023', page = '1'}) async {
+    final uri = Uri.https(
+        baseUrl, '/players', {'team': teamId, 'season': season, 'page': page});
+    final response = await http.get(
+      uri,
+      headers: header,
+    );
+    print(response.body);
+
+    Map<String, dynamic> data = jsonDecode(response.body);
+    data['response'].forEach((e) {
+      print(e['player']);
+    });
+    // final List<TeamPlayers> teamPlayers = data['response']
+    //     .map<TeamPlayers>((e) => TeamPlayers.fromJson(e['player']))
+    //     .toList();
+    
+    // if (teamPlayers.isEmpty) throw Exception('No data found');
+    return [];
   }
 }

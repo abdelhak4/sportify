@@ -9,6 +9,8 @@ class SoccerTeam with _$SoccerTeam {
     required String name,
     required String logo,
     required int id,
+    required String country,
+    required String code,
   }) = _SoccerTeam;
 
   factory SoccerTeam.fromJson(Map<String, dynamic> json) =>
