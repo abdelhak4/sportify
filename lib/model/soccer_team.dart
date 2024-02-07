@@ -6,11 +6,11 @@ part 'soccer_team.g.dart';
 @freezed
 class SoccerTeam with _$SoccerTeam {
   factory SoccerTeam({
-    required String name,
+    required String name, 
     required String logo,
     required int id,
-    required String country,
-    required String code,
+    required String? country,
+    required String? code,
   }) = _SoccerTeam;
 
   factory SoccerTeam.fromJson(Map<String, dynamic> json) =>

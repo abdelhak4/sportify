@@ -27,9 +27,11 @@ class SoccerRepositoryImpl implements SoccerTeamRepository {
       headers: header,
     );
     Map<String, dynamic> data = jsonDecode(response.body);
+    // print(data);
     final List<SoccerTeam> teamData = data['response']
         .map<SoccerTeam>((e) => SoccerTeam.fromJson(e['team']))
         .toList();
+    print(teamData);
     if (teamData.isEmpty) throw Exception('No data found');
     return teamData;
   }
@@ -43,17 +45,19 @@ class SoccerRepositoryImpl implements SoccerTeamRepository {
       uri,
       headers: header,
     );
-    print(response.body);
+    // print(response.body);
+    // print('-------------------');
 
     Map<String, dynamic> data = jsonDecode(response.body);
-    data['response'].forEach((e) {
-      print(e['player']);
-    });
-    // final List<TeamPlayers> teamPlayers = data['response']
-    //     .map<TeamPlayers>((e) => TeamPlayers.fromJson(e['player']))
-    //     .toList();
+    // data['response'].forEach((e) {
+    //   print(e['player']);
+    // });
+    final List<TeamPlayers> teamPlayers = data['response']
+        .map<TeamPlayers>((e) => TeamPlayers.fromJson(e['player']))
+        .toList();
     
-    // if (teamPlayers.isEmpty) throw Exception('No data found');
-    return [];
+    print(teamPlayers);
+    if (teamPlayers.isEmpty) throw Exception('No data found');
+    return teamPlayers;
   }
 }

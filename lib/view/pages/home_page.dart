@@ -80,42 +80,45 @@ class TeamGridView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final soccerTeamProvider = ref.read(soccerViewModelProvider);
-    return GestureDetector(
-      onTap: () async {
-        await soccerTeamProvider.fetchTeamPlayers('1');
-        if (!context.mounted) return;
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) {
-              return TeamScreen(teamPlayers: soccerTeamProvider.teamPlayers);
-            },
-          ),
-        );
-      },
-      child: GridView.count(
-        crossAxisCount: 2,
-        // childAspectRatio: (2 / 1),
-        crossAxisSpacing: 5,
-        mainAxisSpacing: 5,
-        //physics:BouncingScrollPhysics(),
-        padding: const EdgeInsets.all(10.0),
+    return GridView.count(
+      crossAxisCount: 2,
+      // childAspectRatio: (2 / 1),
+      crossAxisSpacing: 5,
+      mainAxisSpacing: 5,
+      //physics:BouncingScrollPhysics(),
+      padding: const EdgeInsets.all(10.0),
 
-        children: soccerTeamProvider.soccerTeams
-            .map((e) => Card(
-                  child: Column(
-                    children: <Widget>[
-                      Image.network(
-                        e.logo,
-                        width: 140,
-                        height: 120,
-                      ),
-                      Text(e.name),
-                    ],
+      children: soccerTeamProvider.soccerTeams
+          .map(
+            (e) => GestureDetector(
+              onTap: () async {
+                await soccerTeamProvider.fetchTeamPlayers(e.id.toString());
+                if (!context.mounted) return;
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return TeamScreen(
+                          teamPlayers: soccerTeamProvider.teamPlayers);
+                    },
                   ),
-                ))
-            .toList(),
-      ),
+                );
+              },
+              child: Card(
+                child: Column(
+                  children: <Widget>[
+                    Image.network(
+                      e.logo,
+                      width: 140,
+                      height: 120,
+                    ),
+                    Text(e.name),
+                  ],
+                ),
+              ),
+            ),
+          )
+          .toList(),
     );
   }
 }

@@ -22,11 +22,20 @@ class TeamScreen extends StatelessWidget {
                     width: 100,
                     height: 100,
                     margin: const EdgeInsets.all(10),
-                    decoration: const BoxDecoration(
-                        color: Colors.blue, shape: BoxShape.circle),
+                    decoration: const BoxDecoration(shape: BoxShape.circle),
                     child: Center(
-                      child: Text('teamPlayersme'),
-                    ),
+                        child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Image.network(
+                          teamPlayers[index].photo,
+                          width: 100,
+                          height: 100,
+                        ),
+                        Text(teamPlayers[index].name),
+                        // Text(teamPlayers[index].),
+                      ],
+                    )),
                   );
                 },
               ),

@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'soccer_team.dart';
+part of 'home_opponent_model.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,37 +14,33 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-SoccerTeam _$SoccerTeamFromJson(Map<String, dynamic> json) {
-  return _SoccerTeam.fromJson(json);
+Home _$HomeFromJson(Map<String, dynamic> json) {
+  return _Home.fromJson(json);
 }
 
 /// @nodoc
-mixin _$SoccerTeam {
+mixin _$Home {
   String get name => throw _privateConstructorUsedError;
   String get logo => throw _privateConstructorUsedError;
   int get id => throw _privateConstructorUsedError;
-  String? get country => throw _privateConstructorUsedError;
-  String? get code => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $SoccerTeamCopyWith<SoccerTeam> get copyWith =>
-      throw _privateConstructorUsedError;
+  $HomeCopyWith<Home> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $SoccerTeamCopyWith<$Res> {
-  factory $SoccerTeamCopyWith(
-          SoccerTeam value, $Res Function(SoccerTeam) then) =
-      _$SoccerTeamCopyWithImpl<$Res, SoccerTeam>;
+abstract class $HomeCopyWith<$Res> {
+  factory $HomeCopyWith(Home value, $Res Function(Home) then) =
+      _$HomeCopyWithImpl<$Res, Home>;
   @useResult
-  $Res call({String name, String logo, int id, String? country, String? code});
+  $Res call({String name, String logo, int id});
 }
 
 /// @nodoc
-class _$SoccerTeamCopyWithImpl<$Res, $Val extends SoccerTeam>
-    implements $SoccerTeamCopyWith<$Res> {
-  _$SoccerTeamCopyWithImpl(this._value, this._then);
+class _$HomeCopyWithImpl<$Res, $Val extends Home>
+    implements $HomeCopyWith<$Res> {
+  _$HomeCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -57,8 +53,6 @@ class _$SoccerTeamCopyWithImpl<$Res, $Val extends SoccerTeam>
     Object? name = null,
     Object? logo = null,
     Object? id = null,
-    Object? country = freezed,
-    Object? code = freezed,
   }) {
     return _then(_value.copyWith(
       name: null == name
@@ -73,35 +67,25 @@ class _$SoccerTeamCopyWithImpl<$Res, $Val extends SoccerTeam>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      country: freezed == country
-          ? _value.country
-          : country // ignore: cast_nullable_to_non_nullable
-              as String?,
-      code: freezed == code
-          ? _value.code
-          : code // ignore: cast_nullable_to_non_nullable
-              as String?,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$SoccerTeamImplCopyWith<$Res>
-    implements $SoccerTeamCopyWith<$Res> {
-  factory _$$SoccerTeamImplCopyWith(
-          _$SoccerTeamImpl value, $Res Function(_$SoccerTeamImpl) then) =
-      __$$SoccerTeamImplCopyWithImpl<$Res>;
+abstract class _$$HomeImplCopyWith<$Res> implements $HomeCopyWith<$Res> {
+  factory _$$HomeImplCopyWith(
+          _$HomeImpl value, $Res Function(_$HomeImpl) then) =
+      __$$HomeImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String name, String logo, int id, String? country, String? code});
+  $Res call({String name, String logo, int id});
 }
 
 /// @nodoc
-class __$$SoccerTeamImplCopyWithImpl<$Res>
-    extends _$SoccerTeamCopyWithImpl<$Res, _$SoccerTeamImpl>
-    implements _$$SoccerTeamImplCopyWith<$Res> {
-  __$$SoccerTeamImplCopyWithImpl(
-      _$SoccerTeamImpl _value, $Res Function(_$SoccerTeamImpl) _then)
+class __$$HomeImplCopyWithImpl<$Res>
+    extends _$HomeCopyWithImpl<$Res, _$HomeImpl>
+    implements _$$HomeImplCopyWith<$Res> {
+  __$$HomeImplCopyWithImpl(_$HomeImpl _value, $Res Function(_$HomeImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -110,10 +94,8 @@ class __$$SoccerTeamImplCopyWithImpl<$Res>
     Object? name = null,
     Object? logo = null,
     Object? id = null,
-    Object? country = freezed,
-    Object? code = freezed,
   }) {
-    return _then(_$SoccerTeamImpl(
+    return _then(_$HomeImpl(
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -126,30 +108,17 @@ class __$$SoccerTeamImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      country: freezed == country
-          ? _value.country
-          : country // ignore: cast_nullable_to_non_nullable
-              as String?,
-      code: freezed == code
-          ? _value.code
-          : code // ignore: cast_nullable_to_non_nullable
-              as String?,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$SoccerTeamImpl implements _SoccerTeam {
-  _$SoccerTeamImpl(
-      {required this.name,
-      required this.logo,
-      required this.id,
-      required this.country,
-      required this.code});
+class _$HomeImpl implements _Home {
+  const _$HomeImpl({required this.name, required this.logo, required this.id});
 
-  factory _$SoccerTeamImpl.fromJson(Map<String, dynamic> json) =>
-      _$$SoccerTeamImplFromJson(json);
+  factory _$HomeImpl.fromJson(Map<String, dynamic> json) =>
+      _$$HomeImplFromJson(json);
 
   @override
   final String name;
@@ -157,56 +126,47 @@ class _$SoccerTeamImpl implements _SoccerTeam {
   final String logo;
   @override
   final int id;
-  @override
-  final String? country;
-  @override
-  final String? code;
 
   @override
   String toString() {
-    return 'SoccerTeam(name: $name, logo: $logo, id: $id, country: $country, code: $code)';
+    return 'Home(name: $name, logo: $logo, id: $id)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SoccerTeamImpl &&
+            other is _$HomeImpl &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.logo, logo) || other.logo == logo) &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.country, country) || other.country == country) &&
-            (identical(other.code, code) || other.code == code));
+            (identical(other.id, id) || other.id == id));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, name, logo, id, country, code);
+  int get hashCode => Object.hash(runtimeType, name, logo, id);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$SoccerTeamImplCopyWith<_$SoccerTeamImpl> get copyWith =>
-      __$$SoccerTeamImplCopyWithImpl<_$SoccerTeamImpl>(this, _$identity);
+  _$$HomeImplCopyWith<_$HomeImpl> get copyWith =>
+      __$$HomeImplCopyWithImpl<_$HomeImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$SoccerTeamImplToJson(
+    return _$$HomeImplToJson(
       this,
     );
   }
 }
 
-abstract class _SoccerTeam implements SoccerTeam {
-  factory _SoccerTeam(
+abstract class _Home implements Home {
+  const factory _Home(
       {required final String name,
       required final String logo,
-      required final int id,
-      required final String? country,
-      required final String? code}) = _$SoccerTeamImpl;
+      required final int id}) = _$HomeImpl;
 
-  factory _SoccerTeam.fromJson(Map<String, dynamic> json) =
-      _$SoccerTeamImpl.fromJson;
+  factory _Home.fromJson(Map<String, dynamic> json) = _$HomeImpl.fromJson;
 
   @override
   String get name;
@@ -215,11 +175,7 @@ abstract class _SoccerTeam implements SoccerTeam {
   @override
   int get id;
   @override
-  String? get country;
-  @override
-  String? get code;
-  @override
   @JsonKey(ignore: true)
-  _$$SoccerTeamImplCopyWith<_$SoccerTeamImpl> get copyWith =>
+  _$$HomeImplCopyWith<_$HomeImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -1,25 +1,20 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'soccer_team.dart';
+part of 'home_opponent_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$SoccerTeamImpl _$$SoccerTeamImplFromJson(Map<String, dynamic> json) =>
-    _$SoccerTeamImpl(
+_$HomeImpl _$$HomeImplFromJson(Map<String, dynamic> json) => _$HomeImpl(
       name: json['name'] as String,
       logo: json['logo'] as String,
       id: json['id'] as int,
-      country: json['country'] as String?,
-      code: json['code'] as String?,
     );
 
-Map<String, dynamic> _$$SoccerTeamImplToJson(_$SoccerTeamImpl instance) =>
+Map<String, dynamic> _$$HomeImplToJson(_$HomeImpl instance) =>
     <String, dynamic>{
       'name': instance.name,
       'logo': instance.logo,
       'id': instance.id,
-      'country': instance.country,
-      'code': instance.code,
     };
