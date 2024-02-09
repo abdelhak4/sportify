@@ -27,16 +27,18 @@ class TeamGridView extends ConsumerWidget {
                   await soccerTeamProvider.fetchNextMatch(team.id.toString());
                 } catch (e) {
                   if (!context.mounted) return;
-                  print("object ..................");
-
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       content: Text(e.toString()),
-                      duration: Duration(seconds: 2),
+                      duration: const Duration(seconds: 2),
                       behavior: SnackBarBehavior.floating,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.vertical(
-                          top: Radius.circular(10),
+                      margin: EdgeInsets.only(
+                          bottom: MediaQuery.of(context).size.height - 100,
+                          left: 10,
+                          right: 10),
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(10),
                         ),
                       ),
                     ),

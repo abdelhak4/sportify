@@ -24,7 +24,6 @@ class SoccerViewModel extends ChangeNotifier {
       soccerTeams = await soccerTeamRepository.fetchSoccerTeam(teamName);
       notifyListeners();
     } catch (e) {
-      debugPrint(e.toString());
       isLoaded = true;
       notifyListeners();
       rethrow;
@@ -38,7 +37,6 @@ class SoccerViewModel extends ChangeNotifier {
       nextMatch = await soccerTeamRepository.fetchNextMatch(teamId);
       notifyListeners();
     } catch (e) {
-      debugPrint(e.toString());
       rethrow;
     }
     notifyListeners();
@@ -63,7 +61,6 @@ class SoccerViewModel extends ChangeNotifier {
       teamPlayers.addAll(morePlayers);
       notifyListeners();
     } catch (e) {
-      debugPrint(e.toString());
       rethrow;
     }
     notifyListeners();

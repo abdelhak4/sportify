@@ -40,7 +40,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           child: Column(
             children: <Widget>[
               SizedBox(
-                height: height * 0.2,
+                height: height * 0.15,
               ),
               Padding(
                 padding: const EdgeInsets.all(13.0),

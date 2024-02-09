@@ -56,7 +56,7 @@ class SoccerRepositoryImpl implements SoccerTeamRepository {
     final uri = Uri.https(
       baseUrl,
       '/players',
-      {'team': teamId, 'seasofn': season, 'page': _playersPage.toString()},
+      {'team': teamId, 'season': season, 'page': _playersPage.toString()},
     );
     final response = await http.get(
       uri,

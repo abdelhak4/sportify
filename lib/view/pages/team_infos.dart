@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:intl/intl.dart';
+
 import 'package:sportify/main.dart';
 import 'package:sportify/model/soccer_team.dart';
 import 'package:sportify/model/team_next_match_model.dart';
@@ -22,14 +22,11 @@ class TeamScreen extends ConsumerStatefulWidget {
 }
 
 class _TeamScreenState extends ConsumerState<TeamScreen> {
-  late final ScrollController _scrollController;
   late final ScrollController _listViewScrollController;
-  double _topPadding = 30.0; // Initial top padding value
 
   @override
   void initState() {
     _listViewScrollController = ScrollController();
-    _scrollController = ScrollController();
 
     _listViewScrollController.addListener(
       () {
@@ -40,21 +37,6 @@ class _TeamScreenState extends ConsumerState<TeamScreen> {
                     _listViewScrollController.position.maxScrollExtent) {
               widget.soccerViewModel
                   .loadMoreTeamPlayers(widget.soccerTeam.id.toString());
-            }
-          },
-        );
-      },
-    );
-
-    _scrollController.addListener(
-      () {
-        setState(
-          () {
-            // Update the top padding based on the scroll position
-            if (_scrollController.offset <=
-                    _scrollController.position.minScrollExtent &&
-                !_scrollController.position.outOfRange) {
-              _topPadding = 20;
             }
           },
         );
@@ -72,13 +54,13 @@ class _TeamScreenState extends ConsumerState<TeamScreen> {
     return Scaffold(
       body: SafeArea(
         child: CustomScrollView(
-          controller: _scrollController,
           slivers: [
-            SiverAppBarWidgit(topPadding: _topPadding, soccerTeam: soccerTeam),
+            SiverAppBarWidgit(soccerTeam: soccerTeam),
             SiverToBoxBody(
-                nextMatch: nextMatch,
-                listViewScrollController: _listViewScrollController,
-                teamPlayers: teamPlayers)
+              nextMatch: nextMatch,
+              listViewScrollController: _listViewScrollController,
+              teamPlayers: teamPlayers,
+            )
           ],
         ),
       ),
@@ -108,7 +90,7 @@ class SiverToBoxBody extends StatelessWidget {
           children: [
             Card(
               child: Padding(
-                padding: const EdgeInsets.all(2),
+                padding: const EdgeInsets.all(8),
                 child: Column(
                   children: [
                     Row(
