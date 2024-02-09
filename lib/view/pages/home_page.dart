@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:sportify/view/pages/team_infos.dart';
+import 'package:sportify/view/widgets/bottom_sheet.dart';
+import 'package:sportify/view/widgets/team_grid_view.dart';
 import 'package:sportify/view_model/home_view_model.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
@@ -19,120 +20,97 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     super.dispose();
   }
 
-  Future _showBottomSheet(BuildContext context, {bool error = false}) {
-    return showModalBottomSheet(
-      context: context,
-      builder: (context) {
-        return error
-            ? const SizedBox(
-                height: 100,
-                width: double.infinity,
-                child: Center(child: Text('An error occurred')),
-              )
-            : const TeamGridView();
-      },
-    );
-  }
+  final _formKey = GlobalKey<FormState>();
+  // shared preferences
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
     final soccerTeamProvider = ref.watch(soccerViewModelProvider);
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Sportify'),
+        backgroundColor: Colors.blue,
+        shadowColor: Colors.lightBlue,
+        elevation: 5,
+      ),
       body: SafeArea(
-        child: Column(
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: TextField(
-                controller: _controller,
-                decoration: InputDecoration(
-                  hintText: 'Search for sports',
-                  prefixIcon: const Icon(Icons.search),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            children: <Widget>[
+              SizedBox(
+                height: height * 0.2,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(13.0),
+                child: TextFormField(
+                  validator: (value) {
+                    if (value == null) {
+                      return 'Please enter some text';
+                    }
+                    value = value.trim();
+                    if (value.isEmpty) {
+                      return 'Please enter some text';
+                    }
+                    if (value.length < 3) {
+                      return 'Please enter at least 3 characters';
+                    }
+                    return null;
+                  },
+                  controller: _controller,
+                  decoration: InputDecoration(
+                    filled: true,
+                    fillColor: Colors.blueAccent[100],
+                    hintText: 'Search...',
+                    hintStyle: const TextStyle(
+                      color: Colors.grey,
+                    ),
+                    suffixIcon: const Icon(Icons.search_rounded,
+                        size: 30, color: Colors.grey),
+                    // errorText: _errorText,
+                    // prefix: const Icon(Icons.search),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                   ),
                 ),
               ),
-            ),
-            soccerTeamProvider.isLoaded
-                ? TextButton(
-                    onPressed: () async {
-                      FocusScope.of(context).unfocus();
-                      await soccerTeamProvider
-                          .fetchSoccerTeam(_controller.text)
-                          .then((value) => _showBottomSheet(context))
-                          .onError((error, stackTrace) =>
-                              _showBottomSheet(context, error: true));
-                    },
-                    child: const Text('Fetch'),
-                  )
-                : const CircularProgressIndicator(),
-          ],
+              soccerTeamProvider.isLoaded
+                  ? SizedBox(
+                      width: 200,
+                      child: TextButton(
+                        style: TextButton.styleFrom(
+                          foregroundColor: Colors.white,
+                          backgroundColor: Colors.blue,
+                          shadowColor: Colors.lightBlue,
+                          elevation: 5,
+                        ),
+                        onPressed: () async {
+                          if (!_formKey.currentState!.validate()) {
+                            return;
+                          }
+                          FocusScope.of(context).unfocus();
+                          await soccerTeamProvider
+                              .fetchSoccerTeam(_controller.text)
+                              .then((value) => showMyBottomSheet(context))
+                              .onError((error, stackTrace) =>
+                                  showMyBottomSheet(context, error: true));
+                          // showBottomSheet(context: context, builder: builder)
+                        },
+                        child: const Text('Search',
+                            style: TextStyle(
+                              fontSize: 20,
+                              letterSpacing: 1.5,
+                              fontWeight: FontWeight.bold,
+                            )),
+                      ),
+                    )
+                  : const CircularProgressIndicator(),
+            ],
+          ),
         ),
       ),
     );
   }
 }
-
-class TeamGridView extends ConsumerWidget {
-  const TeamGridView({super.key});
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final soccerTeamProvider = ref.read(soccerViewModelProvider);
-    return GridView.count(
-      crossAxisCount: 2,
-      // childAspectRatio: (2 / 1),
-      crossAxisSpacing: 5,
-      mainAxisSpacing: 5,
-      //physics:BouncingScrollPhysics(),
-      padding: const EdgeInsets.all(10.0),
-
-      children: soccerTeamProvider.soccerTeams
-          .map(
-            (e) => GestureDetector(
-              onTap: () async {
-                await soccerTeamProvider.fetchTeamPlayers(e.id.toString());
-                if (!context.mounted) return;
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return TeamScreen(
-                          teamPlayers: soccerTeamProvider.teamPlayers);
-                    },
-                  ),
-                );
-              },
-              child: Card(
-                child: Column(
-                  children: <Widget>[
-                    Image.network(
-                      e.logo,
-                      width: 140,
-                      height: 120,
-                    ),
-                    Text(e.name),
-                  ],
-                ),
-              ),
-            ),
-          )
-          .toList(),
-    );
-  }
-}
-
-// Future displayBottomSheet(BuildContext context, String message) {
-//   return showModalBottomSheet(
-//     context: context,
-//     builder: (BuildContext context) {
-//       return Container(
-//         height: 200,
-//         child: Center(
-//           child: Text(message),
-//         ),
-//       );
-//     },
-//   );
-// }

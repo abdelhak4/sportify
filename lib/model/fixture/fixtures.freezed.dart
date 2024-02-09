@@ -20,6 +20,7 @@ Fixtures _$FixturesFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Fixtures {
+// ignore: invalid_annotation_target
   @JsonKey(name: 'venue')
   Venue get stadium => throw _privateConstructorUsedError;
   Status get status => throw _privateConstructorUsedError;
@@ -153,6 +154,7 @@ class _$FixturesImpl implements _Fixtures {
   factory _$FixturesImpl.fromJson(Map<String, dynamic> json) =>
       _$$FixturesImplFromJson(json);
 
+// ignore: invalid_annotation_target
   @override
   @JsonKey(name: 'venue')
   final Venue stadium;
@@ -203,7 +205,7 @@ abstract class _Fixtures implements Fixtures {
   factory _Fixtures.fromJson(Map<String, dynamic> json) =
       _$FixturesImpl.fromJson;
 
-  @override
+  @override // ignore: invalid_annotation_target
   @JsonKey(name: 'venue')
   Venue get stadium;
   @override
